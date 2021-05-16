@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Second EC</title>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+
+    <nav class="navBar">
+      <div class="navHead">
+        <h1>Second EC</h1>
+      </div>
+      <div class="navContent">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+        </ul>
+      </div>
+      <div class="userDynamic">
+        <ul>
+          <% if(logedIn){%>
+            <li> <a href="/logout">LogOut</a> </li>
+            <li> <a href="/yourorders">Your Orders</a> </li>
+            <li><a href="/cart">Cart(<%= cartIndex%>)</a></li>
+          <%}else{%>
+            <li><a href="/login">Login/Register</a></li>
+          <%}%>
+        </ul>
+      </div>
+    </nav>
+
+  </head>
+  <body>

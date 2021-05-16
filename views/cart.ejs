@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<section class="minHeight">
+  <div class="products">
+    <% let totalCartValue = 0 %>
+    <% for(let product of user.userDetails.cartProducts){ %>
+      <div class="product">
+        <h2><%= product.title%></h2>
+        <p>Rs. <%= product.price%></p>
+        <%product.des = product.des.substring(0, 100)%>
+        <p><%= product.des%>...</p>
+        <form class="" action="/removefromcart" method="post">
+          <button type="submit" name="productID" value=<%= product._id%>>Remove from cart</button>
+        </form>
+      </div>
+      <% totalCartValue += product.price%>
+    <%}%>
+  </div>
+  <div class="checkoutCon">
+    <form class="" action="/checkout" method="post">
+      <p>Total Price = Rs. <%= totalCartValue%></p>
+      <input type="hidden" name="totalCartValue" value=<%= totalCartValue%>>
+      <button type="submit" name="button">Checkout</button>
+    </form>
+  </div>
+</section>
+
+<%- include("partials/footer") -%>

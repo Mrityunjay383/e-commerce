@@ -1,0 +1,25 @@
+<%- include("partials/header")%>
+
+<section class="minHeight">
+  <h2>Add Product</h2>
+
+  <form class="" action="/addproduct" method="post">
+
+    <div class="form-group">
+      <label>Product Title</label>
+      <input type="text" class="form-control" name="productTitle">
+    </div>
+    <div class="form-group">
+      <label>Product Price (in INR)</label>
+      <input type="text" class="form-control" name="productPrice">
+    </div>
+    <div class="form-group">
+      <label>Product Description</label>
+      <textarea class="form-control" name="productDes" rows="5"></textarea>
+    </div>
+
+    <button class="btn btn-primary" type="submit" name="button">Add Product</button>
+  </form>
+</section>
+
+<%- include("partials/footer")%>

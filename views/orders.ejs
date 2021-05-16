@@ -1,0 +1,29 @@
+<%- include("partials/header") -%>
+
+<section class="minHeight">
+  <% if(userOrder){%>
+    <h2>Your Orders</h2>
+  <%}else{%>
+    <h2>All Orders</h2>
+  <%}%>
+  <% for(let order of orders){%>
+    <div class="ordersCon">
+      <% if(userOrder){%>
+        <h3>New Order</h3>
+      <%}else{%>
+        <h3>New Order by User(<%= order.userID%>)</h3>
+      <%}%>
+      <h4>Products: </h4>
+      <% for(let product of order.checkoutProducts){%>
+        <div class="orderedproduct">
+          <h5>Title: <%= product.title%></h5>
+          <p>Id: <%= product._id%></p>
+          <p>Price: <%= product.price%></p>
+        </div>
+      <%}%>
+      <p class="totalCV">Total Value = Rs. <%= order.totalCartValue%></p>
+    </div>
+  <% } %>
+</section>
+
+<% include("partials/footer") -%>
