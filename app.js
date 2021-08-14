@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -15,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.use(session({
-  secret: 'This is a secret',
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false
 }));
@@ -23,7 +24,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/secondEcDB", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useCreateIndex", true);
 
 const productSchema = {
@@ -86,7 +87,7 @@ app.get("/orders", auth, adminAuth, cartIndex,  (req, res) => {
   });
 });
 
-app.post("/addproduct", (req, res) => {
+app.post("/addproduct",isUserAdmin, (req, res) => {
 
   let newProduct = new Product({
     title: req.body.productTitle,
@@ -295,5 +296,15 @@ async function userFound(req, res, next){
       res.send("User not found");
     }
     next();
+  });
+}
+
+async function isUserAdmin(req, res, next){
+  await User.findById(req.user.id, (err, foundUser) => {
+    if(foundUser.role == "Admin"){
+      next();
+    }else{
+      res.send("Only admin can add product");
+    }
   });
 }
