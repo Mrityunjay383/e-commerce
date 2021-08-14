@@ -272,10 +272,6 @@ app.route("/register")
     });
   });
 
-app.listen(3000, () => {
-  console.log("Server is running");
-});
-
 async function cartIndex(req, res, next){
   if(req.isAuthenticated()){
     await User.findById(req.user.id, (err, foundUser) => {
@@ -308,3 +304,7 @@ async function isUserAdmin(req, res, next){
     }
   });
 }
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server is running");
+});
